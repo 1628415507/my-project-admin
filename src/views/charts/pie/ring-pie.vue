@@ -1,8 +1,8 @@
 <!--
  * @Author: Hongzf
- * @Date: 2022-09-01 15:47:14
+ * @Date: 2022-09-01 16:15:31
  * @LastEditors: Hongzf
- * @LastEditTime: 2022-09-01 16:58:48
+ * @LastEditTime: 2022-09-01 17:28:32
  * @Description:
 -->
 <template>
@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import Chart from '@/components/Charts/LineChart/LineMarker'
+import Chart from '@/components/Charts/PieChart/RingPie'
 
 export default {
-  name: 'BaseChart',
+  name: 'RingPie',
   components: { Chart }
 }
 </script>

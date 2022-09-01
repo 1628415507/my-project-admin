@@ -2,7 +2,7 @@
  * @Author: Hongzf
  * @Date: 2022-09-01 15:47:14
  * @LastEditors: Hongzf
- * @LastEditTime: 2022-09-01 17:05:43
+ * @LastEditTime: 2022-09-01 17:31:47
  * @Description:图表
  */
 /** When your routing table is too long, you can split it into small modules**/
@@ -25,7 +25,7 @@ const chartsRouter = {
       path: 'line',
       component: () => import('@/views/charts/line/index'),
       name: 'Line',
-      meta: { title: '折线图' }, // Line Chart
+      meta: { title: '折线图 line' }, // Line Chart
       redirect: '/charts/line/base-line',
       children: [
         // 基础折线图
@@ -49,7 +49,7 @@ const chartsRouter = {
       path: 'bar',
       component: () => import('@/views/charts/bar/index'),
       name: 'Bar',
-      meta: { title: '柱状图' }, // Line Chart
+      meta: { title: '柱状图 bar' }, // Line Chart
       redirect: '/charts/bar/base-bar',
       children: [
         // 基础柱状图
@@ -58,8 +58,37 @@ const chartsRouter = {
           component: () => import('@/views/charts/bar/base-bar'),
           name: 'BaseLine',
           meta: { title: '基础柱状图' }
+        },
+        {
+          path: 'base-bar',
+          component: () => import('@/views/charts/bar/base-bar'),
+          name: 'BaseLine',
+          meta: { title: '基础柱状图2' }
         }
+      ]
+    },
+    // 饼图
+    {
+      path: 'pie',
+      component: () => import('@/views/charts/pie/index'),
+      name: 'Pie',
+      meta: { title: '饼图 pie' }, // Line Chart
+      redirect: '/charts/pie/ring-pie',
+      children: [
+        // 基础柱状图
+        {
+          path: 'ring-pie',
+          component: () => import('@/views/charts/pie/ring-pie'),
+          name: 'RingPie',
+          meta: { title: '圆环饼图' }
+        },
         //
+        {
+          path: 'ring-pie',
+          component: () => import('@/views/charts/pie/ring-pie'),
+          name: 'RingPie',
+          meta: { title: '圆环饼图2' }
+        }
       ]
     },
     {
