@@ -1,3 +1,10 @@
+<!--
+ * @Author: Hongzf
+ * @Date: 2022-09-01 16:15:31
+ * @LastEditors: Hongzf
+ * @LastEditTime: 2022-09-01 16:48:19
+ * @Description:
+-->
 <template>
   <div class="chart-container">
     <chart height="100%" width="100%" />
@@ -5,10 +12,10 @@
 </template>
 
 <script>
-import Chart from '@/components/Charts/LineMarker'
+import Chart from '@/components/Charts/LineChart/BaseLine'
 
 export default {
-  name: 'LineChart',
+  name: 'BaseLine',
   components: { Chart }
 }
 </script>

@@ -1,3 +1,10 @@
+/*
+ * @Author: Hongzf
+ * @Date: 2022-09-01 15:47:14
+ * @LastEditors: Hongzf
+ * @LastEditTime: 2022-09-01 16:52:38
+ * @Description:图表
+ */
 /** When your routing table is too long, you can split it into small modules**/
 
 import Layout from '@/layout'
@@ -5,13 +12,38 @@ import Layout from '@/layout'
 const chartsRouter = {
   path: '/charts',
   component: Layout,
-  redirect: 'noRedirect',
+  redirect: '/charts/line/base-line',
   name: 'Charts',
   meta: {
-    title: 'Charts',
-    icon: 'chart'
+    title: 'Charts图表',
+    icon: 'chart',
+    noCache: true
   },
   children: [
+    // 折线图
+    {
+      path: 'line',
+      component: () => import('@/views/charts/line/index'),
+      name: 'Line',
+      meta: { title: '折线图' }, // Line Chart
+      redirect: '/charts/line/base-line',
+      children: [
+        // 基础折线图
+        {
+          path: 'base-line',
+          component: () => import('@/views/charts/line/base-line'),
+          name: 'BaseLine',
+          meta: { title: '基础折线图' }
+        },
+        // 渐变折线图
+        {
+          path: 'line',
+          component: () => import('@/views/charts/line/line'),
+          name: 'Line',
+          meta: { title: '渐变折线图', noCache: true }
+        }
+      ]
+    },
     {
       path: 'keyboard',
       component: () => import('@/views/charts/keyboard'),
@@ -19,16 +51,10 @@ const chartsRouter = {
       meta: { title: 'Keyboard Chart', noCache: true }
     },
     {
-      path: 'line',
-      component: () => import('@/views/charts/line'),
-      name: 'LineChart',
-      meta: { title: 'Line Chart', noCache: true }
-    },
-    {
       path: 'mix-chart',
       component: () => import('@/views/charts/mix-chart'),
       name: 'MixChart',
-      meta: { title: 'Mix Chart', noCache: true }
+      meta: { title: '混合图', noCache: true }
     }
   ]
 }
