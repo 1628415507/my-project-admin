@@ -2,7 +2,7 @@
  * @Author: Hongzf
  * @Date: 2022-09-01 15:47:14
  * @LastEditors: Hongzf
- * @LastEditTime: 2022-09-01 16:52:38
+ * @LastEditTime: 2022-09-01 17:05:43
  * @Description:图表
  */
 /** When your routing table is too long, you can split it into small modules**/
@@ -42,6 +42,24 @@ const chartsRouter = {
           name: 'Line',
           meta: { title: '渐变折线图', noCache: true }
         }
+      ]
+    },
+    // 柱状图
+    {
+      path: 'bar',
+      component: () => import('@/views/charts/bar/index'),
+      name: 'Bar',
+      meta: { title: '柱状图' }, // Line Chart
+      redirect: '/charts/bar/base-bar',
+      children: [
+        // 基础柱状图
+        {
+          path: 'base-bar',
+          component: () => import('@/views/charts/bar/base-bar'),
+          name: 'BaseLine',
+          meta: { title: '基础柱状图' }
+        }
+        //
       ]
     },
     {
