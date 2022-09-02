@@ -2,7 +2,7 @@
  * @Author: Hongzf
  * @Date: 2022-09-01 15:47:14
  * @LastEditors: Hongzf
- * @LastEditTime: 2022-09-01 17:31:47
+ * @LastEditTime: 2022-09-02 09:41:18
  * @Description:图表
  */
 /** When your routing table is too long, you can split it into small modules**/
@@ -56,13 +56,13 @@ const chartsRouter = {
         {
           path: 'base-bar',
           component: () => import('@/views/charts/bar/base-bar'),
-          name: 'BaseLine',
+          name: 'BaseBar',
           meta: { title: '基础柱状图' }
         },
         {
-          path: 'base-bar',
+          path: 'base-bar-2',
           component: () => import('@/views/charts/bar/base-bar'),
-          name: 'BaseLine',
+          name: 'BaseBar2',
           meta: { title: '基础柱状图2' }
         }
       ]
@@ -84,9 +84,9 @@ const chartsRouter = {
         },
         //
         {
-          path: 'ring-pie',
+          path: 'ring-pie-2',
           component: () => import('@/views/charts/pie/ring-pie'),
-          name: 'RingPie',
+          name: 'RingPie2',
           meta: { title: '圆环饼图2' }
         }
       ]

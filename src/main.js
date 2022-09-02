@@ -1,3 +1,10 @@
+/*
+ * @Author: Hongzf
+ * @Date: 2022-09-01 15:47:14
+ * @LastEditors: Hongzf
+ * @LastEditTime: 2022-09-02 10:14:25
+ * @Description:
+ */
 import Vue from 'vue'
 
 import Cookies from 'js-cookie'
@@ -19,6 +26,8 @@ import './permission' // permission control
 import './utils/error-log' // error log
 
 import * as filters from './filters' // global filters
+import dictionary from './utils/dictionary'
+Vue.prototype.$dict = dictionary
 
 /**
  * If you don't want to use mock-server
