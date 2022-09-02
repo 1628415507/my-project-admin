@@ -20,7 +20,7 @@
       destroy-on-close
       v-on="$listeners"
     >
-      <CustomFormPanel
+      <DynamicForm
         ref="formPanel"
         :form-config="formConfig"
         :dialog-status="type"
@@ -31,7 +31,7 @@
         <template #dismissApplication="scope">
           <Upload :upload-data.sync="uploadData" :file-info="scope.item.dismissApplication" />
         </template>
-      </CustomFormPanel>
+      </DynamicForm>
       <!-- 底部按钮 -->
       <div slot="footer" class="dialog-footer">
         <el-button
@@ -51,12 +51,12 @@
 </template>
 <script>
 // import { queryStaffInfo, saveResignInfo, saveDismissInfo } from '@/api/staff-manage'
-import CustomFormPanel from '@/components/ConfigComponent/CustomFormPanel'
+import DynamicForm from '@/components/ConfigComponent/DynamicForm'
 import Upload from './Upload.vue'
 import { dissmissFormRules, dissmissFormConfig } from './dialog-config'
 
 export default {
-  components: { Upload, CustomFormPanel },
+  components: { Upload, DynamicForm },
   props: {
     // 编辑信息
     editData: {
