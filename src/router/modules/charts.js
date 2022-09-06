@@ -2,7 +2,7 @@
  * @Author: Hongzf
  * @Date: 2022-09-01 15:47:14
  * @LastEditors: Hongzf
- * @LastEditTime: 2022-09-02 09:41:18
+ * @LastEditTime: 2022-09-05 16:40:19
  * @Description:图表
  */
 /** When your routing table is too long, you can split it into small modules**/
@@ -57,13 +57,13 @@ const chartsRouter = {
           path: 'base-bar',
           component: () => import('@/views/charts/bar/base-bar'),
           name: 'BaseBar',
-          meta: { title: '基础柱状图' }
+          meta: { title: '基础柱状图-单列' }
         },
         {
-          path: 'base-bar-2',
-          component: () => import('@/views/charts/bar/base-bar'),
-          name: 'BaseBar2',
-          meta: { title: '基础柱状图2' }
+          path: 'base-bar-mul',
+          component: () => import('@/views/charts/bar/base-bar-mul'),
+          name: 'BaseBarMul',
+          meta: { title: '基础柱状图-多列' }
         }
       ]
     },

@@ -1,11 +1,10 @@
 <!--
  * @Author: Hongzf
- * @Date: 2022-09-05 10:18:51
+ * @Date: 2022-08-25 17:06:32
  * @LastEditors: Hongzf
- * @LastEditTime: 2022-09-05 17:25:04
- * @Description: 基础柱状图
+ * @LastEditTime: 2022-09-05 15:35:42
+ * @Description: 柱状图-多条
 -->
-
 <template>
   <div :id="id" :class="className" :style="{ height, width }" />
 </template>
@@ -25,10 +24,6 @@ export default {
       type: String,
       default: 'chart'
     },
-    ecData: {
-      type: Array,
-      default: () => []
-    },
     width: {
       type: String,
       default: '200px'
@@ -36,10 +31,6 @@ export default {
     height: {
       type: String,
       default: '200px'
-    },
-    title: {
-      type: String,
-      default: '标题'
     }
   },
   data() {
@@ -49,19 +40,29 @@ export default {
   },
   computed: {
     xData() {
-      return ['.Net开发', 'Vue开发工程', 'Java开发工程师', '开发工程师', 'SA', '项目总监', '总经理', '副总经理', '商务经理', '产品总监', '项目经理', '开发经理', '需求分析师', '前端开发工程师', 'Java开发实习生', '前端开发实习生']
+      return ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月']
     },
     seriesData() {
-      return [
-        {
-          // name: 'tokyo',
-          data: [0, 10, 7, 0, 0, 2, 1, 1, 0, 0, 2, 0, 0, 8, 0, 0]
-        }
-      ]
+      return [{
+        name: 'one',
+        data: [320, 332, 301, 334, 390, 301, 334, 390]
+      },
+      {
+        name: 'two',
+        data: [220, 182, 191, 234, 290, 301, 304, 300]
+      },
+      {
+        name: 'three',
+        data: [150, 232, 201, 154, 190, 201, 334, 390]
+      },
+      {
+        name: 'four',
+        data: [150, 232, 201, 154, 190, 301, 334, 350]
+      }]
+    },
+    legendData() {
+      return this.seriesData.map(item => item.name)
     }
-    // legendData() {
-    //   return this.seriesData.map(item => item.name);
-    // }
   },
   mounted() {
     this.initChart()
@@ -78,9 +79,9 @@ export default {
       this.chart = echarts.init(document.getElementById(this.id))
       const seriesConfig = {
         type: 'bar',
-        barWidth: 28,
-        // barMinWidth: 15,
-        // barMaxWidth: 50,
+        // barWidth: 15,
+        barMinWidth: 15,
+        barMaxWidth: 50,
         barGap: 0, // 间距
         itemStyle: {
           // 柱形图圆角，鼠标移上去效果，如果只是一个数字则说明四个参数全部设置为那么多
@@ -90,47 +91,15 @@ export default {
         }
       }
       this.chart.setOption({
-        // 滚动条
-        dataZoom: [
-          {
-            show: this.xData.length > 8, // 是否显示滑动条，不影响使用
-            xAxisIndex: 0, // 这里是从X轴的0刻度开始
-            type: 'slider', // 这个 dataZoom 组件是 slider 型 dataZoom 组件
-            startValue: 0, // 从头开始。
-            endValue: 7, // 一次性展示6个
-            zoomLock: true,
-            showDataShadow: false, // 是否显示数据阴影 默认auto
-            showDetail: false, // 即拖拽时候是否显示详细数值信息 默认true
-            realtime: false, // 是否实时更新(拖动滚动条的时候数据是否变化，false的话停止拖动数据才变化)
-            filterMode: 'filter',
-            // handleIcon: 'M-9.35,34.56V42m0-40V9.5m-2,0h4a2,2,0,0,1,2,2v21a2,2,0,0,1-2,2h-4a2,2,0,0,1-2-2v-21A2,2,0,0,1-11.35,9.5Z',
-            moveHandleSize: 20,
-            moveOnMouseMove: true,
-            maxValueSpan: 7,
-            minValueSpan: 7,
-            // moveHandleSize: 0,
-            brushSelect: false, // 刷选功能，设为false可以防止拖动条长度改变 ************（这是一个坑）
-            // 滚动条样式
-            bottom: 10,
-            height: 8, // 滚动条高度
-            backgroundColor: '#fcfcfc',
-            borderColor: 'rgba(43,48,67,.1)',
-            fillerColor: '#3aa1ff',
-            handleStyle: {
-              color: '#3aa1ff',
-              borderColor: '#3aa1ff'
-            }
-          }
-        ],
-        color: ['#3aa1ff'],
+        color: ['#3aa1ff', '#4ecb73', '#fbd437', '#435188'],
         backgroundColor: '#FFF', // 背景
         // 标题
         title: {
-          text: this.title,
+          text: '项目人员详细配置情况',
           top: 16,
           textStyle: {
-            fontWeight: 'bold',
-            fontSize: 16,
+            fontWeight: 'normal',
+            fontSize: 14,
             color: '#7f7f7f'
           },
           left: '1%'
@@ -150,7 +119,7 @@ export default {
             show: true, // tooltip轴线,
             type: 'shadow', // 背景色
             shadowStyle: {
-              color: 'rgba(0,0,0,0.05)' // 指针区域-背景色设置
+              color: 'rgba(0,0,0,0.1)'// 指针区域-背景色设置
             }
           },
           // 【自定义tooltip样式】
@@ -159,35 +128,30 @@ export default {
             // console.log('【 params 】-126', params)
             let htmlStr = ''
             // 编写展示模板
-            params.forEach(item => {
-            // ${item.seriesName}
+            params.forEach((item) => {
               htmlStr += `<div style="display: flex; justify-content: space-between; align-item:center">
-                            <div>
-                             <span style="font-size:10px;color:${item.color};">●</span>
-                             <span style="font-size:10px">${params[0].name}</span>
-                            </div>
-                          <div style="font-weight:500; margin-left: 15px;">${item.value}人</div>
+                        <div><span style="font-size:10px;color:${item.color};">●</span> ${item.seriesName}</div>
+                        <div style="font-weight:500; margin-left: 15px;">${item.value}</div>
                     </div>`
             })
-            // htmlStr = params[0].name + htmlStr;
+            htmlStr = params[0].name + htmlStr
             return htmlStr
           }
         },
         // 【图例】
-        // legend: {
-        //   show: false,
-        //   data: this.legendData,
-        //   icon: 'rect',
-        //   x: 'center',
-        //   y: 'bottom',
-        //   itemWidth: 7,
-        //   itemHeight: 7,
-        //   itemGap: 13,
-        //   textStyle: {
-        //     fontSize: 12,
-        //     color: '#b3b3b3'
-        //   }
-        // },
+        legend: {
+          data: this.legendData,
+          icon: 'rect',
+          x: 'center',
+          y: 'bottom',
+          itemWidth: 7,
+          itemHeight: 7,
+          itemGap: 13,
+          textStyle: {
+            fontSize: 12,
+            color: '#b3b3b3'
+          }
+        },
         grid: {
           top: 80, // 图表距离标题的距离
           left: '2%',
@@ -208,7 +172,7 @@ export default {
             axisLine: {
               // X轴线的颜色
               lineStyle: {
-                color: '#666'
+                color: '#bbb'
               }
             },
             // 原来默认会采用标签不重叠的策略间隔显示标签。
@@ -216,7 +180,7 @@ export default {
               interval: 0, // 全部标签显示
               // rotate: '45', // 标签倾斜度数
               formatter: function(params) {
-                const provideNumber = 5 // 每行显示的字数
+                const provideNumber = 4 // 每行显示的字数
                 if (params && params.toString().length > provideNumber) {
                   const strToArr = params.toString().split('')
                   for (let i = provideNumber; i <= params.toString().length; i += provideNumber + 1) {
@@ -263,6 +227,21 @@ export default {
             ...seriesConfig,
             name: this.seriesData[0].name,
             data: this.seriesData[0].data
+          },
+          {
+            ...seriesConfig,
+            name: this.seriesData[1].name,
+            data: this.seriesData[1].data
+          },
+          {
+            ...seriesConfig,
+            name: this.seriesData[2].name,
+            data: this.seriesData[2].data
+          },
+          {
+            ...seriesConfig,
+            name: this.seriesData[3].name,
+            data: this.seriesData[3].data
           }
         ]
       })
